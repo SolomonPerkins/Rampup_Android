@@ -21,6 +21,7 @@ public class DisplayMessageActivity extends ActionBarActivity {
 		Intent intent = getIntent();	//Get intent used to navigate user here
 		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		
+		
 		//Create text view
 		TextView textView = new TextView(this);	//Activity is a subclass of Context
 		textView.setTextSize(40);
