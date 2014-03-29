@@ -1,9 +1,12 @@
 package com.example.myfirstapp;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +18,7 @@ import android.widget.EditText;
 public class MainActivity extends ActionBarActivity {
 	
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-	
+	public static String STATE_SCORE ="playerScore";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,21 @@ public class MainActivity extends ActionBarActivity {
 		//Set the home button as the Up button
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-/*		if (savedInstanceState == null) {
+		//Ensure you're running on Honeycomb or higher
+		//SDK_INT throws a runtime error for 2.0 or lower
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+			//Make the app icon behave as a button for main activity
+			ActionBar actionBar = getActionBar();
+//			actionBar.setHomeButtonEnabled(true);
+			
+		}
+		
+		//If you dont have any save data. The view was used previous
+		//If you implement onRestoreInstantState you dont need to implement this check. As the function will do it for you
+		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-*/	
 		
 	}
 
@@ -105,5 +118,35 @@ public class MainActivity extends ActionBarActivity {
 		
 		
 	}
-
+	
+	@Override
+	protected void onStart(){
+		super.onStart();
+		Log.w("MyFirstApp", "Solomon: onStart called");
+	
+	}
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
+		Log.w("MyFirstApp", "Solomon: onStop called");
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState){	//When an activity gets distroyed you decide what you want to save
+		
+		
+		savedInstanceState.putInt(STATE_SCORE, 1);
+		
+		//Always used the super.. so it works with view hierarchy
+		super.onSaveInstanceState(savedInstanceState);
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+		
+		super.onRestoreInstanceState(savedInstanceState);
+		
+		int myCurrentScore = savedInstanceState.getInt(STATE_SCORE);
+	}
 }
