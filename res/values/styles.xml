@@ -15,6 +15,11 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
+		<item name="android:windowActionBarOverlay">true</item>
+		
+		<!-- To be backward compatible -->
+		<item name="windowActionBarOverlay">true</item>
+
+	</style>
 
 </resources>
