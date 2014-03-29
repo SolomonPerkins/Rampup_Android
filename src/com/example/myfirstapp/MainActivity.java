@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +21,28 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		if (savedInstanceState == null) {
+		
+		//Set the home button as the Up button
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+/*		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+*/	
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		
+		//Inflate the menu items for use in action bar
+		MenuInflater inflater = getMenuInflater();	
+		
+		//Adds all the items declared in the resoure to menu
+		inflater.inflate(R.menu.action_buttons, menu);
+		
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -40,11 +50,20 @@ public class MainActivity extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch(item.getItemId()){
+		case R.id.action_search:
+			openSearch();
 			return true;
+		case R.id.action_settings:
+			openSettings();
+			return true;
+			
+			default:				
+				return super.onOptionsItemSelected(item);
+			
+		
 		}
-		return super.onOptionsItemSelected(item);
+		
 	}
 
 	/**
@@ -75,6 +94,15 @@ public class MainActivity extends ActionBarActivity {
 		
 		//Send the data
 		startActivity(intent);
+		
+	}
+	
+	public void openSearch(){
+		
+		
+	}
+	public void openSettings(){
+		
 		
 	}
 

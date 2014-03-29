@@ -25,7 +25,8 @@
         <activity
             android:name="com.example.myfirstapp.DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
-            android:parentActivityName="com.example.myfirstapp.MainActivity" >
+            android:parentActivityName="com.example.myfirstapp.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.myfirstapp.MainActivity" />
